@@ -171,7 +171,7 @@ export class Item extends MyObject3D {
       this._mesh.scale.set(s, s, 1)
 
       const ang = Param.instance.ang;
-      const one = 360;
+      const one = 360 * 2;
       const d = one / Conf.instance.ITEM_NUM;
       const offset = 0.1
       const rate = Util.instance.map(ang, 0, 1, Math.max(0, this._id * d - d * 0.25), this._id * d + d);
