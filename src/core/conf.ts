@@ -30,7 +30,7 @@ export class Conf {
   public IS_TAB: boolean = Util.instance.isIPad();
   public USE_ROLLOVER:boolean = Util.instance.isPc() && !Util.instance.isIPad()
 
-  public ITEM_NUM:number = 11;
+  public ITEM_NUM:number = 7;
 
   constructor() {}
   public static get instance(): Conf {

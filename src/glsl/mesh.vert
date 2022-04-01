@@ -56,7 +56,7 @@ void main(){
   p.x = mix(p.x, nextP.x, hide);
   p.y = mix(p.y, nextP.y, hide);
 
-  float radius = (2.0 * info.y) * 0.1;
+  float radius = (2.0 * info.y) * 0.01;
   p.z += (-radius * yure) + sin(n1) * radius * yure;
   p.x += cos(n1) * radius * yure;
 

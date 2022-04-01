@@ -167,18 +167,18 @@ export class Item extends MyObject3D {
     if(this._mesh != undefined) {
       const sw = Func.instance.sw()
       const sh = Func.instance.sh()
-      const s = Func.instance.r((Math.min(sw, sh) / this._imgSize) * 2.5)
+      const s = Func.instance.r((Math.min(sw, sh) / this._imgSize) * 2)
       this._mesh.scale.set(s, s, 1)
 
       const ang = Param.instance.ang;
       const one = 360;
       const d = one / Conf.instance.ITEM_NUM;
-      const offset = 0.05
+      const offset = 0.1
       const rate = Util.instance.map(ang, 0, 1, Math.max(0, this._id * d - d * 0.25), this._id * d + d);
 
       // 正面を向くように調整
       // this.rotation.z = Util.instance.radian(d * this._id + d * 0.5) * -1;
-      this.rotation.z = Util.instance.radian(ang) * -1;
+      this.rotation.z = Util.instance.radian(ang + d * 0.1) * -1;
 
       const show = Util.instance.map(rate, 0, 1, 0, 0.5 - offset)
       const hide = Util.instance.map(rate, 0, 1, 0.5 + offset, 1)
