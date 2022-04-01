@@ -177,7 +177,8 @@ export class Item extends MyObject3D {
       const rate = Util.instance.map(ang, 0, 1, Math.max(0, this._id * d - d * 0.25), this._id * d + d);
 
       // 正面を向くように調整
-      this.rotation.z = Util.instance.radian(d * this._id + d * 0.5) * -1;
+      // this.rotation.z = Util.instance.radian(d * this._id + d * 0.5) * -1;
+      this.rotation.z = Util.instance.radian(ang) * -1;
 
       const show = Util.instance.map(rate, 0, 1, 0, 0.5 - offset)
       const hide = Util.instance.map(rate, 0, 1, 0.5 + offset, 1)
