@@ -2,15 +2,12 @@ import { Func } from '../core/func';
 import { Canvas } from '../webgl/canvas';
 import { Object3D } from 'three/src/core/Object3D';
 import { Conf } from '../core/conf';
-import { Util } from '../libs/util';
-import { Color } from 'three';
 import { Param } from '../core/param';
 import { Item } from './item';
 
 export class Con extends Canvas {
 
   private _con: Object3D;
-  private _colors:Array<Color> = [];
   private _val:number = 0;
   private _oldAng:number = -1;
   private _rotCnt:number = 0;
@@ -18,9 +15,6 @@ export class Con extends Canvas {
 
   constructor(opt: any) {
     super(opt);
-
-    this._makeColors()
-    Util.instance.shuffle(this._colors)
 
     this._con = new Object3D()
     this.mainScene.add(this._con)
@@ -59,7 +53,6 @@ export class Con extends Canvas {
     for(let i = 0; i < Conf.instance.ITEM_NUM; i++) {
       const item = new Item({
         id:i,
-        color:this._colors,
         onLoaded: () => {
           this._eLoaded();
         }
@@ -119,8 +112,7 @@ export class Con extends Canvas {
 
 
   private _render(): void {
-    // this.renderer.setClearColor(this._colors[this._colors.length - 1], 1)
-    this.renderer.setClearColor(0x000000, 1)
+    this.renderer.setClearColor(Param.instance.mesh.bgColor.value, 1)
     this.renderer.render(this.mainScene, this.camera)
   }
 
@@ -157,30 +149,4 @@ export class Con extends Canvas {
       this._render();
     }
   }
-
-
-  //
-  // ------------------------------------
-  private _makeColors():void {
-    this._colors = []
-
-    const colA = new Color(Util.instance.random(0, 1), Util.instance.random(0, 1), Util.instance.random(0, 1))
-    const colB = new Color(Util.instance.random(0, 1), Util.instance.random(0, 1), Util.instance.random(0, 1))
-    const colC = new Color(Util.instance.random(0, 1), Util.instance.random(0, 1), Util.instance.random(0, 1))
-
-    for(let i = 0; i < 20; i++) {
-        const colD = colA.clone()
-        this._colors.push(colD.lerp(colB, Util.instance.random(0, 1)))
-
-        const colE = colB.clone()
-        this._colors.push(colE.lerp(colC, Util.instance.random(0, 1)))
-
-        const colF = colC.clone()
-        this._colors.push(colF.lerp(colA, Util.instance.random(0, 1)))
-    }
-  }
-
-
-
-
 }

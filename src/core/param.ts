@@ -15,6 +15,7 @@ export class Param {
   private _stats: any;
 
   public mesh = {
+    bgColor:{value:0x2a2b3b, type:'color'},
     rate:{value:0, min:0, max:100},
     ang:{value:65, min:0, max:360 * 1},
   }

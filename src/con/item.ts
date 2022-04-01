@@ -17,8 +17,6 @@ export class Item extends MyObject3D {
   private _id:number = 0;
   private _mesh:Points | undefined;
   private _imgSize:number = 0;
-  // private _color:Array<Color>;
-  // private _nowColor:Color = new Color();
 
   private _isLoaded:boolean = false;
   get isLoaded():boolean {
@@ -30,14 +28,12 @@ export class Item extends MyObject3D {
     return this._sample;
   }
 
-
   public onLoaded:any;
 
 
   constructor(opt:any) {
     super()
 
-    // this._color = opt.color
     this._id = opt.id;
     this.onLoaded = opt.onLoaded;
 
@@ -79,7 +75,6 @@ export class Item extends MyObject3D {
       console.log(this._sample.length);
       this._isLoaded = true;
       this._call(this.onLoaded);
-      // this._makeMesh();
     }
   }
 
@@ -99,7 +94,7 @@ export class Item extends MyObject3D {
               yure:{value:0},
               show:{value:0},
               hide:{value:0},
-              color:{value:new Color()},
+              color:{value:new Color(0xffffff)},
           }
       })
     )
@@ -182,7 +177,7 @@ export class Item extends MyObject3D {
       const rate = Util.instance.map(ang, 0, 1, Math.max(0, this._id * d - d * 0.25), this._id * d + d);
 
       // 正面を向くように調整
-      this.rotation.z = Util.instance.radian(d * this._id) * -1;
+      this.rotation.z = Util.instance.radian(d * this._id + d * 0.5) * -1;
 
       const show = Util.instance.map(rate, 0, 1, 0, 0.5 - offset)
       const hide = Util.instance.map(rate, 0, 1, 0.5 + offset, 1)
@@ -193,17 +188,11 @@ export class Item extends MyObject3D {
         yure = (1 - show) + (hide)
       }
 
-      // const colA = this._id == 0 ? this._color[Conf.instance.ITEM_NUM - 1] : this._color[this._id - 1]
-      // const colB = this._id == Conf.instance.ITEM_NUM - 1 ? this._color[0] : this._color[this._id + 1]
-      // this._nowColor.lerp(colA, 1 - show)
-      // this._nowColor.lerp(colB, 1 - hide)
-
       this._setUni(this._mesh, 'yure', yure)
       this._setUni(this._mesh, 'size', 3)
       this._setUni(this._mesh, 'time', this._c)
       this._setUni(this._mesh, 'show', show)
       this._setUni(this._mesh, 'hide', hide)
-      this._setUni(this._mesh, 'color', new Color(0xffffff))
     }
   }
 }
